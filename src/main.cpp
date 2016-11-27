@@ -55,12 +55,26 @@ int main()
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
                 app.close();
+            // if (event.type == sf::Event::KeyPressed)
+                // if (event.key.code == sf::Keyboard::Up) rotate = true;
+                // if (event.key.code == sf::Keyboard::Right) x += 3;
+                // else if (event.key.code == sf::Keyboard::Left) x -= 3;
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            x += 3;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            x -= 3;
 
         dy += 0.2;
         y += dy;
         if (y>500)
             dy = -10;
+
+        for(int i=0; i<10; i++)
+            if((x + 50 > plat[i].x) && (x + 20 < plat[i].x + 68)
+                && (y + 70 > plat[i].y) && (y + 70 < plat[i].y + 14) && (dy > 0))
+                dy = -10;
+
         sPers.setPosition(x, y);
 
         // Clear screen
