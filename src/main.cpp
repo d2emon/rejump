@@ -37,6 +37,13 @@ int main()
         plat[i].y = rand() % winSize[1];
     }
 
+    int x=100;
+    int y=100;
+    int h=200;
+
+    float dx=0;
+    float dy=0;
+
 	// Start the game loop
     while (app.isOpen())
     {
@@ -45,12 +52,19 @@ int main()
         while (app.pollEvent(event))
         {
             // Close window : exit
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed ||
+                (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
                 app.close();
         }
 
+        dy += 0.2;
+        y += dy;
+        if (y>500)
+            dy = -10;
+        sPers.setPosition(x, y);
+
         // Clear screen
-        app.clear();
+        // app.clear();
 
         // Draw the sprite
         app.draw(sBackground);
